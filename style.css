@@ -1,0 +1,17 @@
+#board {
+    display: grid;
+    grid-template-columns: repeat(50, 10px);
+  }
+  
+  #board > div {
+    border: 1px solid #ccc;
+  }
+  
+  .dead {
+    background-color: white;
+  }
+  
+  .alive {
+    background-color: black;
+  }
+  
